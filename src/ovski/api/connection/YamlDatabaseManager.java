@@ -85,6 +85,6 @@ public class YamlDatabaseManager {
         {
             e.printStackTrace();
         }
-        return YamlDatabaseManager.getYamlDatabaseAccessor().getConfig().getInt("MySQL.Port");
+        return YamlDatabaseManager.getYamlDatabaseAccessor().getConfig().getInt("MySQL.Port"); //3306 by default
     }
 }

@@ -3,8 +3,7 @@ package ovski.api.mysql;
 import ovski.api.connection.MySQLDatabaseConnection;
 
 /**
- * MysqlKillManager
- * Manage requests involving the kill table
+ * MysqlKillManagerminecraft_kill table
  * Require a plugin with a database connection
  * @author Ovski
  */
@@ -19,7 +18,7 @@ public class MysqlKillManager {
          * @param int weaponId : Contains the id of the weapon use for the kill
          * @param String date : Contains the date of the kill
          */
-        MySQLDatabaseConnection.sendData("INSERT INTO kill (killed_player_id, killer_player_id, date, weapon_id) "
+        MySQLDatabaseConnection.sendData("INSERT INTO minecraft_kill (killed_player_id, killer_player_id, date, weapon_id) "
                 + "VALUES ("
                 + killedId
                 + ","

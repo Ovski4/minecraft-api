@@ -33,7 +33,7 @@ public class MysqlJailedManager
      */
     public static void freeJailedUser(String pseudo, String jailId, String reason, String beginingDate, long remainingTime)
     {
-        int userId = MysqlPlayerManager.getPlayerIdFromPseudo(pseudo);
+        //int userId = MysqlPlayerManager.getPlayerIdFromPseudo(pseudo);
         //UPDATE where =jaled_user_id = userID
     }
 }

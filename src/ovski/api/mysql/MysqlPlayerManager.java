@@ -4,11 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ovski.api.connection.MySQLDatabaseConnection;
+import ovski.api.entities.PlayerStats;
 
 
 /**
  * MysqlPlayerManager
- * Manage requests involving the user table
+ * Manage requests involving the minecraft_player table
  * Require a plugin with a database connection
  * @author Ovski
  */
@@ -21,12 +22,12 @@ public class MysqlPlayerManager
      */
     public static int getPlayerIdFromPseudo(String pseudo)
     {
-        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT player_id FROM player WHERE LOWER(pseudo)=LOWER('"+pseudo+"')");
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT id FROM minecraft_player WHERE LOWER(pseudo)=LOWER('"+pseudo+"')");
         try
         {
             if (resultat != null && resultat.next())
             {
-                return resultat.getInt("player_id");
+                return resultat.getInt("id");
             }
             else
             {
@@ -47,7 +48,7 @@ public class MysqlPlayerManager
      */
     public static boolean exists(String pseudo)
     {
-        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT player_id FROM player WHERE LOWER(pseudo)=LOWER('"+pseudo+"')");
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT id FROM minecraft_player WHERE LOWER(pseudo)=LOWER('"+pseudo+"')");
         try
         {
             if (resultat != null && resultat.next())
@@ -64,5 +65,103 @@ public class MysqlPlayerManager
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * updateStats method update the statistics of a player
+     * @param PlayerStats playerStats : Contains the playerStats of a player
+     */
+    public static void updateStats(PlayerStats playerStats)
+    {
+        int playerId = getPlayerIdFromPseudo(playerStats.getPseudo());
+        MySQLDatabaseConnection.sendData("UPDATE minecraft_player SET "
+                + "broken_blocks="+playerStats.getBlocksBroken()+", "
+                + "placed_blocks="+playerStats.getBlocksPlaced()+", "
+                + "stupid_deaths="+playerStats.getStupidDeaths()+", "
+                + "pvp_deaths="+playerStats.getNormalDeaths()+", "
+                + "kills="+playerStats.getKills()+", "
+                + "played_time="+playerStats.getTimePlayed()+", "
+                + "verbosity="+playerStats.getVerbosity()+", "
+                + "prestige="+playerStats.getPrestige()
+                + " WHERE id = "+playerId
+        );
+        System.out.println("The stats of "+playerStats.getPseudo()+" have been updated");
+    }
+
+    /**
+     * updatePrestige method update the prestige of a player
+     * @param int prestige : Contains the value of the prestige
+     */
+    public static void updatePrestige(String pseudo, int prestige)
+    {
+        int playerId = getPlayerIdFromPseudo(pseudo);
+        MySQLDatabaseConnection.sendData("UPDATE minecraft_player SET "
+                + "prestige="+prestige
+                + " WHERE id = "+playerId
+        );
+    }
+
+    /**
+     * getPrestige method retrieve the prestige of a player
+     * @param String pseudo : Contains the pseudo of a player
+     * @return int prestige : The prestige value
+     */
+    public static int getPrestige(String pseudo)
+    {
+        int playerId = getPlayerIdFromPseudo(pseudo);
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT prestige FROM minecraft_player WHERE id="+playerId);
+        try
+        {
+            if (resultat != null && resultat.next())
+            {
+                return resultat.getInt(1);
+            }
+            else
+            {
+                return -1000;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return -1000;
+        }
+    }
+
+    /**
+     * getStats method retrieve the statistics of a player, and load them in a PlayerStats object
+     * @param String pseudo : Contains the pseudo of a player
+     * @return PlayerStats playerStats : The stats object of the player
+     */
+    public static PlayerStats getStats(String pseudo)
+    {
+        int playerId = getPlayerIdFromPseudo(pseudo);
+        PlayerStats playerStats = new PlayerStats();
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT * FROM minecraft_player WHERE id="+playerId);
+        try
+        {
+            if (resultat != null && resultat.next())
+            {
+                    playerStats.setPseudo(pseudo);
+                    playerStats.setBlocksBroken(resultat.getInt(7));
+                    playerStats.setBlocksPlaced(resultat.getInt(8));
+                    playerStats.setStupidDeaths(resultat.getInt(9));
+                    playerStats.setNormalDeaths(resultat.getInt(10));
+                    playerStats.setKills(resultat.getInt(11));
+                    playerStats.setTimePlayed(resultat.getLong(12));
+                    playerStats.setVerbosity(resultat.getInt(13));
+                    playerStats.setPrestige(resultat.getInt(14));
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        return playerStats;
     }
 }

@@ -8,7 +8,7 @@ import ovski.api.connection.MySQLDatabaseConnection;
 
 /**
  * MysqlNoteManager
- * Manage the requests involving the note table
+ * Manage the requests involving the minecraft_note table
  * Require a plugin with a database connection
  * @author Ovski
  */
@@ -24,7 +24,7 @@ public class MysqlNoteManager {
     {
         int receiverId = MysqlPlayerManager.getPlayerIdFromPseudo(receiverPseudo);
         int donorId = MysqlPlayerManager.getPlayerIdFromPseudo(donorPseudo);
-        MySQLDatabaseConnection.sendData("INSERT INTO note (receiver_player_id, donor_player_id, value) "
+        MySQLDatabaseConnection.sendData("INSERT INTO minecraft_note (receiver_player_id, donor_player_id, value) "
                 + "VALUES ("
                 + receiverId
                 + ","
@@ -44,7 +44,7 @@ public class MysqlNoteManager {
     {
         int donorId = MysqlPlayerManager.getPlayerIdFromPseudo(donorPseudo);
         int receiverId = MysqlPlayerManager.getPlayerIdFromPseudo(receiverPseudo);
-        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT note_id FROM note "
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT note_id FROM minecraft_note "
         + "WHERE receiver_player_id="+receiverId+" AND donor_player_id="+donorId);
         try
         {
@@ -74,7 +74,7 @@ public class MysqlNoteManager {
     {
         int donorId = MysqlPlayerManager.getPlayerIdFromPseudo(donorPseudo);
         int receiverId = MysqlPlayerManager.getPlayerIdFromPseudo(receiverPseudo);
-        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT value FROM note "
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT value FROM minecraft_note "
         + "WHERE receiver_player_id="+receiverId+" AND donor_player_id="+donorId);
         try
         {
@@ -104,7 +104,7 @@ public class MysqlNoteManager {
     {
         int donorId = MysqlPlayerManager.getPlayerIdFromPseudo(donorPseudo);
         int receiverId = MysqlPlayerManager.getPlayerIdFromPseudo(receiverPseudo);
-        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT note_id FROM note "
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT note_id FROM minecraft_note "
         + "WHERE receiver_player_id="+receiverId+" AND donor_player_id="+donorId);
         try
         {
@@ -130,7 +130,7 @@ public class MysqlNoteManager {
      */
     public static void updateNote(int noteId, int value)
     {
-        MySQLDatabaseConnection.sendData("UPDATE note SET "
+        MySQLDatabaseConnection.sendData("UPDATE minecraft_note SET "
                 + "value="+value
                 + " WHERE note_id = "+noteId
         );
