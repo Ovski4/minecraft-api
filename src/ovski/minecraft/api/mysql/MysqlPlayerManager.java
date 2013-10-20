@@ -1,11 +1,10 @@
-package ovski.api.mysql;
+package ovski.minecraft.api.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ovski.api.connection.MySQLDatabaseConnection;
-import ovski.api.entities.PlayerStats;
-
+import ovski.minecraft.api.connection.MySQLDatabaseConnection;
+import ovski.minecraft.api.entities.PlayerStats;
 
 /**
  * MysqlPlayerManager
@@ -49,6 +48,32 @@ public class MysqlPlayerManager
     public static boolean exists(String pseudo)
     {
         ResultSet resultat = MySQLDatabaseConnection.getData("SELECT id FROM minecraft_player WHERE LOWER(pseudo)=LOWER('"+pseudo+"')");
+        try
+        {
+            if (resultat != null && resultat.next())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * exists method check if a player is registered as a user in database
+     * @param String pseudo : Contains the pseudo of the player
+     * @return boolean
+     */
+    public static boolean isRegistered(String pseudo)
+    {
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT user_id FROM minecraft_player WHERE LOWER(pseudo)=LOWER('"+pseudo+"')");
         try
         {
             if (resultat != null && resultat.next())
@@ -163,5 +188,21 @@ public class MysqlPlayerManager
             return null;
         }
         return playerStats;
+    }
+
+    /**
+     * createPlayer method insert a new player in database
+     * @param pseudo : the pseudo of the player
+     */
+    public static void createPlayer(int userId, String pseudo)
+    {
+    	MySQLDatabaseConnection.sendData("INSERT INTO minecraft_player"
+    			+ "(user_id, pseudo, broken_blocks, placed_blocks, stupid_deaths,"
+    			+ " pvp_deaths, kills, played_time, verbosity, prestige) "
+                + "VALUES (" + userId + ", '" + pseudo + "', 0, 0, 0, 0, 0, 0, 0, 0)"
+        );
+
+    	MysqlUserManager.setPlayer(getPlayerIdFromPseudo(pseudo), userId);
+        System.out.println("player "+pseudo+" has been created");
     }
 }

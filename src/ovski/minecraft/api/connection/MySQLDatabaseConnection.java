@@ -1,4 +1,4 @@
-package ovski.api.connection;
+package ovski.minecraft.api.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

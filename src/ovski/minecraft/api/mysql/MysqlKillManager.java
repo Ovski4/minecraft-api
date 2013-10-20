@@ -1,6 +1,6 @@
-package ovski.api.mysql;
+package ovski.minecraft.api.mysql;
 
-import ovski.api.connection.MySQLDatabaseConnection;
+import ovski.minecraft.api.connection.MySQLDatabaseConnection;
 
 /**
  * MysqlKillManagerminecraft_kill table

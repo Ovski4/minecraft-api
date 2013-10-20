@@ -1,9 +1,9 @@
-package ovski.api.connection;
+package ovski.minecraft.api.connection;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import ovski.api.yaml.YamlAccessor;
+import ovski.minecraft.api.yaml.YamlAccessor;
 
 
 public class YamlDatabaseManager {

@@ -1,11 +1,11 @@
-package ovski.api.mysql;
+package ovski.minecraft.api.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.bukkit.Location;
 
-import ovski.api.connection.MySQLDatabaseConnection;
+import ovski.minecraft.api.connection.MySQLDatabaseConnection;
 
 
 public class MysqlJailManager

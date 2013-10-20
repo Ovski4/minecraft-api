@@ -1,10 +1,9 @@
-package ovski.api.mysql;
+package ovski.minecraft.api.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ovski.api.connection.MySQLDatabaseConnection;
-
+import ovski.minecraft.api.connection.MySQLDatabaseConnection;
 
 /**
  * MysqlNoteManager

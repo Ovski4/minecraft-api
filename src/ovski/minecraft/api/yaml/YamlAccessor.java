@@ -1,4 +1,4 @@
-package ovski.api.yaml;
+package ovski.minecraft.api.yaml;
 
 import java.io.File;
 import java.io.FileInputStream;

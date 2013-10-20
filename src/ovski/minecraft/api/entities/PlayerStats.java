@@ -1,4 +1,4 @@
-package ovski.api.entities;
+package ovski.minecraft.api.entities;
 
 /**
  * PlayerStats
