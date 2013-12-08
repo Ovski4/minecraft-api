@@ -27,6 +27,11 @@ public abstract class SubCommand
         this.args = args;
     }
 
+    /**
+     * Process the command
+     * 
+     * @return true or false
+     */
     public boolean process()
     {
         if (!check())
@@ -35,11 +40,21 @@ public abstract class SubCommand
             return launch();
     }
 
+    /**
+     * Check the arguments of the command
+     * 
+     * @return true or false
+     */
     protected boolean check()
     {
         return false;
     }
 
+    /**
+     * Launch the command
+     * 
+     * @return true or false
+     */
     protected boolean launch()
     {
         return false;
