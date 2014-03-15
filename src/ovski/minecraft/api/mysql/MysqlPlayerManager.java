@@ -156,18 +156,20 @@ public class MysqlPlayerManager
     {
         int playerId = getPlayerIdFromPseudo(pseudo);
         PlayerStats playerStats = new PlayerStats();
-        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT * FROM minecraft_player WHERE id="+playerId);
+        ResultSet resultat = MySQLDatabaseConnection.getData(""
+            + "SELECT broken_blocks, placed_blocks, stupid_deaths, pvp_deaths, kills, played_time, verbosity, prestige FROM minecraft_player WHERE id="+playerId
+        );
         try {
             if (resultat != null && resultat.next()) {
                 playerStats.setPseudo(pseudo);
-                playerStats.setBlocksBroken(resultat.getInt(7));
-                playerStats.setBlocksPlaced(resultat.getInt(8));
-                playerStats.setStupidDeaths(resultat.getInt(9));
-                playerStats.setNormalDeaths(resultat.getInt(10));
-                playerStats.setKillNumber(resultat.getInt(11));
-                playerStats.setTimePlayed(resultat.getLong(12));
-                playerStats.setVerbosity(resultat.getInt(13));
-                playerStats.setPrestige(resultat.getInt(14));
+                playerStats.setBlocksBroken(resultat.getInt(1));
+                playerStats.setBlocksPlaced(resultat.getInt(2));
+                playerStats.setStupidDeaths(resultat.getInt(3));
+                playerStats.setNormalDeaths(resultat.getInt(4));
+                playerStats.setKillNumber(resultat.getInt(5));
+                playerStats.setTimePlayed(resultat.getLong(6));
+                playerStats.setVerbosity(resultat.getInt(7));
+                playerStats.setPrestige(resultat.getInt(8));
             } else {
                 return null;
             }
@@ -189,9 +191,9 @@ public class MysqlPlayerManager
     public static void createPlayer(int userId, String pseudo)
     {
         MySQLDatabaseConnection.sendData("INSERT INTO minecraft_player"
-            + "(user_id, pseudo, broken_blocks, placed_blocks, stupid_deaths,"
+            + "(user_id, score, pseudo, broken_blocks, placed_blocks, stupid_deaths,"
             + " pvp_deaths, kills, played_time, verbosity, prestige) "
-            + "VALUES (" + userId + ", '" + pseudo + "', 0, 0, 0, 0, 0, 0, 0, 0)"
+            + "VALUES (" + userId + ", 0,'" + pseudo + "', 0, 0, 0, 0, 0, 0, 0, 0)"
         );
 
         MysqlUserManager.setPlayer(getPlayerIdFromPseudo(pseudo), userId);
