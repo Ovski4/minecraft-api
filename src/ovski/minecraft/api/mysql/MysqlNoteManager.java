@@ -47,7 +47,7 @@ public class MysqlNoteManager
     {
         int donorId = MysqlPlayerManager.getPlayerIdFromPseudo(donorPseudo);
         int receiverId = MysqlPlayerManager.getPlayerIdFromPseudo(receiverPseudo);
-        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT note_id FROM minecraft_note "
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT id FROM minecraft_note "
         + "WHERE receiver_player_id="+receiverId+" AND donor_player_id="+donorId);
         try {
             if (resultat != null && resultat.next()) {
@@ -98,7 +98,7 @@ public class MysqlNoteManager
     {
         int donorId = MysqlPlayerManager.getPlayerIdFromPseudo(donorPseudo);
         int receiverId = MysqlPlayerManager.getPlayerIdFromPseudo(receiverPseudo);
-        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT note_id FROM minecraft_note "
+        ResultSet resultat = MySQLDatabaseConnection.getData("SELECT id FROM minecraft_note "
         + "WHERE receiver_player_id="+receiverId+" AND donor_player_id="+donorId);
         try {
             if (resultat != null && resultat.next()) {
@@ -122,7 +122,7 @@ public class MysqlNoteManager
     {
         MySQLDatabaseConnection.sendData("UPDATE minecraft_note SET "
             + "value="+value
-            + " WHERE note_id = "+noteId
+            + " WHERE id = "+noteId
         );
     }
 }
