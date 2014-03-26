@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import net.ovski.minecraft.api.connection.MySQLDatabaseConnection;
 import net.ovski.minecraft.api.entities.PlayerStats;
 
-
 /**
  * MysqlPlayerManager
  * 

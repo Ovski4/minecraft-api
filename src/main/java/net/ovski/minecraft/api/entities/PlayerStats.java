@@ -1,5 +1,7 @@
 package net.ovski.minecraft.api.entities;
 
+import java.lang.Float;
+
 /**
  * PlayerStats
  * 
