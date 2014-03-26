@@ -1,4 +1,4 @@
-package ovski.minecraft.api.command;
+package net.ovski.minecraft.api.command;
 
 import org.bukkit.entity.Player;
 

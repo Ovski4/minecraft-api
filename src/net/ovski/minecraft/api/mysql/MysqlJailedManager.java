@@ -1,6 +1,6 @@
-package ovski.minecraft.api.mysql;
+package net.ovski.minecraft.api.mysql;
 
-import ovski.minecraft.api.connection.MySQLDatabaseConnection;
+import net.ovski.minecraft.api.connection.MySQLDatabaseConnection;
 
 public class MysqlJailedManager
 {

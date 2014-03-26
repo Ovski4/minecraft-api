@@ -1,10 +1,11 @@
-package ovski.minecraft.api.mysql;
+package net.ovski.minecraft.api.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ovski.minecraft.api.connection.MySQLDatabaseConnection;
-import ovski.minecraft.api.entities.PlayerStats;
+import net.ovski.minecraft.api.connection.MySQLDatabaseConnection;
+import net.ovski.minecraft.api.entities.PlayerStats;
+
 
 /**
  * MysqlPlayerManager
