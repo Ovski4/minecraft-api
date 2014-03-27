@@ -20,7 +20,7 @@ public class MysqlKillManager {
      * @param weaponId : Contains the id of the weapon use for the kill
      * @param date : Contains the date of the kill
      */
-    public static void insertKill(int killerId, int killedId, int weaponId, String date)
+    public static void insertKill(int killerId, int killedId, String weaponId, String date)
     {
         MySQLDatabaseConnection.sendData("INSERT INTO minecraft_kill (killed_player_id, killer_player_id, date, weapon_id) "
             + "VALUES ("
@@ -29,8 +29,8 @@ public class MysqlKillManager {
             + killerId
             + ",'"
             + date
-            + "',"
-            + weaponId+ ")"
+            + "','"
+            + weaponId+ "')"
         );
     }
 }
