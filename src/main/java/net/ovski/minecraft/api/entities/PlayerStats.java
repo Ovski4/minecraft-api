@@ -44,9 +44,9 @@ public class PlayerStats
     public float getRatio()
     {
         if ((stupidDeaths+normalDeaths)==0) {
-            return Float.valueOf(killNumber);
+            return (float) killNumber;
         } else {
-            return (Float.valueOf(killNumber)/(Float.valueOf(stupidDeaths)+Float.valueOf(normalDeaths)));
+            return (float) killNumber/(stupidDeaths+normalDeaths);
         }
     }
 
